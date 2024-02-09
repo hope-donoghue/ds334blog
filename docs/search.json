@@ -4,34 +4,55 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "Hi, my name is Hope Donoghue. I am a current senior majoring in data science at St. Lawrence University in Canton, New York. This blog is for my DATA-334 class."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "posts/first blog/index.html",
+    "href": "posts/first blog/index.html",
+    "title": "Holiday Movie Ratings",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!"
+    "text": "Hello, welcome to my first blog post! Although it is February and the holidays are officially over, it is never too early to start researching the best holiday movies to watch when the holidays come next! In this blog post, I am going to be exploring a holiday movies data set from Tidy Tuesday’s post on December 12, 2023. This data set is from IMDb movie ratings and it has 800 observations (movies). Follow along as I explore which movies in the data set are rated the highest and which movies are rated the lowest. I will also be looking at whether or not holiday movies have become more popular over the past century.\nhttps://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-12-12/readme.md\nThe variables I will be investigating are:\n\n\n\nvariables\ndescription\n\n\n\n\nprimary_title\nthe title of the movie\n\n\nruntime_minutes\nhow long the movie is in minutes\n\n\nyear\nthe year the movie was released\n\n\naverage_rating\nthe average rating of the movie out of 10\n\n\nnum_votes\nthe number of votes a movie received\n\n\n\n\n\n\n\n\n\n\n\nThis line plot displays the number of holiday movies created over time from 1925 through 2023. It is clear from the plot that within the past two decades, the number of holiday movies have skyrocketed from less than 10 a year to close to 80. The year that made the most holiday movies seems to be 2021 with roughly 78. It is interesting how there is a dip after 2021 in the number of holiday movies made. In 2023, only 43 holiday movies were created. Are holiday movies losing popularity and on a downward trend for the future? We will not know the answer to that question for at least a few years, but it will interesting to follow and see if that happens.\n\n\n\n\n\n\n\n\nWhich movies should you definitely add to your list to watch? Look no further! This lollipop plot displays the top ten highest rated holiday movies that received more than 1000 votes by users. With an average rating of 8.1, “A Christmas Carol” also known as “Scrooge” from 1951 is the top rated holiday movie. A close second with a rating of 8.0, is “Roman Holiday” from 1953. Interestingly enough, all of the movies that made the top ten are from the 20th century. My personal favorite is “White Christmas,” so I was happy to see that movie made the top ten.\n\n\n\n\n\n\n\n\nThis lollipop plot displays the top ten worst rated holiday movies that received more than 1000 votes. Be sure to avoid these movies as they received the lowest average ratings. The worst movie on the list is “Kirk Cameron’s Saving Christmas” from 2014 with an average rating of 1.3 out of 10.\n\n\n\nIn this blog post, the best and worst holiday movies were revealed along with a potentially alarming trend that holiday movies might be losing popularity in the coming years given the decrease in the number of movies made in 2023. Granted this decline in holiday movies might be due to the fact that there was a Writers Guild of America strike from May to September 2023 that halted film-making. However, we cannot be certain of this fact until we see how many holiday movies are created in 2024 and compare the numbers.\nNevertheless, I really enjoyed making this blog post and wrangling the data to create these three visualizations. I was limited to a lollipop plot for displaying the best and worst holiday movies because I only had one row that corresponded to a particular movie. In this case, I was given the average rating for a movie and I was not able to calculate the average rating myself given all the information from the votes. I wish I had the original raw data because I would have added error bars or done a boxplot to show the variability that exists within the data and the potential outliers. In class, we learned about the importance of displaying the variability and distribution shape in a visualization. I feel like displaying the variability in the data would have helped me better understand the data to see if any outliers are influencing the average rating. In light of this, I tried to make the lollipop plot clear and easy to interpret. I included text that displays the actual rating in addition to the scale on the x-axis because I think it helps with readability. I also decided to start the x-axis at 0 because average rating is a length variable. In class, we learned that when displaying length, the axis should start at 0. Additionally, I decided to use a line plot to show the trend in holiday movie counts over time because a line plot displays time-series the best.\nThanks for reading!"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/first blog/index.html#introduction",
+    "href": "posts/first blog/index.html#introduction",
+    "title": "Holiday Movie Ratings",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\ntest"
+    "text": "Hello, welcome to my first blog post! Although it is February and the holidays are officially over, it is never too early to start researching the best holiday movies to watch when the holidays come next! In this blog post, I am going to be exploring a holiday movies data set from Tidy Tuesday’s post on December 12, 2023. This data set is from IMDb movie ratings and it has 800 observations (movies). Follow along as I explore which movies in the data set are rated the highest and which movies are rated the lowest. I will also be looking at whether or not holiday movies have become more popular over the past century.\nhttps://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-12-12/readme.md\nThe variables I will be investigating are:\n\n\n\nvariables\ndescription\n\n\n\n\nprimary_title\nthe title of the movie\n\n\nruntime_minutes\nhow long the movie is in minutes\n\n\nyear\nthe year the movie was released\n\n\naverage_rating\nthe average rating of the movie out of 10\n\n\nnum_votes\nthe number of votes a movie received"
   },
   {
-    "objectID": "posts/test/index.html",
-    "href": "posts/test/index.html",
-    "title": "Test Post",
+    "objectID": "posts/first blog/index.html#popularity-of-holiday-movies",
+    "href": "posts/first blog/index.html#popularity-of-holiday-movies",
+    "title": "Holiday Movie Ratings",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nggplot(data = penguins, aes(x = bill_length_mm)) + geom_histogram(color = \"black\", fill = \"white\"\n                                                                    )\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\nWarning: Removed 2 rows containing non-finite values (`stat_bin()`)."
+    "text": "This line plot displays the number of holiday movies created over time from 1925 through 2023. It is clear from the plot that within the past two decades, the number of holiday movies have skyrocketed from less than 10 a year to close to 80. The year that made the most holiday movies seems to be 2021 with roughly 78. It is interesting how there is a dip after 2021 in the number of holiday movies made. In 2023, only 43 holiday movies were created. Are holiday movies losing popularity and on a downward trend for the future? We will not know the answer to that question for at least a few years, but it will interesting to follow and see if that happens."
+  },
+  {
+    "objectID": "posts/first blog/index.html#top-10-highest-rated-holiday-movies",
+    "href": "posts/first blog/index.html#top-10-highest-rated-holiday-movies",
+    "title": "Holiday Movie Ratings",
+    "section": "",
+    "text": "Which movies should you definitely add to your list to watch? Look no further! This lollipop plot displays the top ten highest rated holiday movies that received more than 1000 votes by users. With an average rating of 8.1, “A Christmas Carol” also known as “Scrooge” from 1951 is the top rated holiday movie. A close second with a rating of 8.0, is “Roman Holiday” from 1953. Interestingly enough, all of the movies that made the top ten are from the 20th century. My personal favorite is “White Christmas,” so I was happy to see that movie made the top ten."
+  },
+  {
+    "objectID": "posts/first blog/index.html#top-10-lowest-rated-holiday-movies",
+    "href": "posts/first blog/index.html#top-10-lowest-rated-holiday-movies",
+    "title": "Holiday Movie Ratings",
+    "section": "",
+    "text": "This lollipop plot displays the top ten worst rated holiday movies that received more than 1000 votes. Be sure to avoid these movies as they received the lowest average ratings. The worst movie on the list is “Kirk Cameron’s Saving Christmas” from 2014 with an average rating of 1.3 out of 10."
+  },
+  {
+    "objectID": "posts/first blog/index.html#wrap-up",
+    "href": "posts/first blog/index.html#wrap-up",
+    "title": "Holiday Movie Ratings",
+    "section": "",
+    "text": "In this blog post, the best and worst holiday movies were revealed along with a potentially alarming trend that holiday movies might be losing popularity in the coming years given the decrease in the number of movies made in 2023. Granted this decline in holiday movies might be due to the fact that there was a Writers Guild of America strike from May to September 2023 that halted film-making. However, we cannot be certain of this fact until we see how many holiday movies are created in 2024 and compare the numbers.\nNevertheless, I really enjoyed making this blog post and wrangling the data to create these three visualizations. I was limited to a lollipop plot for displaying the best and worst holiday movies because I only had one row that corresponded to a particular movie. In this case, I was given the average rating for a movie and I was not able to calculate the average rating myself given all the information from the votes. I wish I had the original raw data because I would have added error bars or done a boxplot to show the variability that exists within the data and the potential outliers. In class, we learned about the importance of displaying the variability and distribution shape in a visualization. I feel like displaying the variability in the data would have helped me better understand the data to see if any outliers are influencing the average rating. In light of this, I tried to make the lollipop plot clear and easy to interpret. I included text that displays the actual rating in addition to the scale on the x-axis because I think it helps with readability. I also decided to start the x-axis at 0 because average rating is a length variable. In class, we learned that when displaying length, the axis should start at 0. Additionally, I decided to use a line plot to show the trend in holiday movie counts over time because a line plot displays time-series the best.\nThanks for reading!"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ds334blog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nHope Donoghue\n\n\n\n\n\n\n  \n\n\n\n\nTest Post\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nHope Donoghue\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJan 31, 2024\n\n\nHope Donoghue\n\n\n\n\n\n\nNo matching items"
+    "text": "Holiday Movie Ratings\n\n\n\n\n\n\n\nholiday\n\n\nvisualizations\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nHope Donoghue\n\n\n\n\n\n\nNo matching items"
   }
 ]
