@@ -1,0 +1,225 @@
+---
+title: "Premier League Investigation"
+author: "Hope Donoghue"
+date: "February 17, 2024"
+categories: [soccer, visualizations, premier league]
+image: "prem_logo.jpeg"
+---
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+# Get the Data
+
+tuesdata <- tidytuesdayR::tt_load('2023-04-04')
+tuesdata <- tidytuesdayR::tt_load(2023, week = 14)
+
+soccer <- tuesdata$soccer
+
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+# load libraries
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+
+# Premier League Investigation 
+
+## Introduction 
+
+Hello, welcome back! As an avid Premier League fan myself, I could not pass up the opportunity to investigate some Premier League data from the 2021-2022 season. This was a memorable season as the title race came down to the final match day with Manchester City claiming the crown over Liverpool by 1 point! The data set comes from Tidy Tuesday's post on April 4, 2023 and it contains 380 observations. Each season consists of 380 games, where each of the 20 teams play 38 games (every team plays each other both home and away). The bottom three teams that get the lowest amount of points get relegated to the Championship League, which is the league below the Premier League. In this blog post, I will be focusing on visualizing statistics relating to goals! Follow along as I explore how many goals were scored each month, which teams scored the most goals, which teams gave up the most goals and which teams had the highest shot conversion rates!
+
+<a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-04-04/readme.md"> Click here for data set </a>
+
+The variables I will be investigating are: 
+
+| variables | description 
+|-----------|-----------|
+| team  |  the team name |
+| month |  the month the game took place in |  
+| goals | the number of goals a team scores in a match|
+| goals_against |  the number of goals a team gives up in a match|  
+| shots | the number of shots a team has in a match|
+| shots_on_target | the number of shots on goal that a team has in a match| 
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+soccer_month <- soccer %>%
+  mutate(month = month(dmy(Date))) %>%
+  mutate(month = case_when(
+    month == "8" ~ "August",
+    month == "9" ~ "September",
+    month == "10" ~ "October", 
+    month == "11" ~ "November",
+    month == "12" ~ "December",
+    month == "1" ~ "January",
+    month == "2" ~ "February",
+    month == "3" ~ "March",
+    month == "4" ~ "April",
+    month == "5" ~ "May"
+  ))
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+home_team <- soccer_month %>%
+  select(HomeTeam, FTHG, HS, HST, HF, HC, HY, HR, month) %>%
+  group_by(HomeTeam) %>%
+  summarise(home_goals = sum(FTHG), home_shots = sum(HS), home_shots_target = sum(HST), home_fouls = sum(HF), home_corners = sum(HC), home_yellows = sum(HY), home_reds = sum(HR))
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+away_team <- soccer_month %>%
+  select(AwayTeam, FTAG, AS, AST, AF, AC, AY, AR, month) %>%
+  group_by(AwayTeam) %>%
+  summarise(away_goals = sum(FTAG), away_shots = sum(AS), away_shots_target = sum(AST), away_fouls = sum(AF), away_corners = sum(AC), away_yellows = sum(AY), away_reds = sum(AR))
+  
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+prem_stats <- full_join(home_team, away_team, by = c("HomeTeam" = "AwayTeam")) %>%
+  rename("Team" = "HomeTeam") %>%
+  mutate(total_goals = home_goals + away_goals, total_shots = home_shots + away_shots, total_shots_target = home_shots_target + away_shots_target, total_fouls = home_fouls + away_fouls, total_yellows = home_yellows + away_yellows, total_red = home_reds + away_reds)
+```
+
+
+## Total Goals Scored Per Month
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+# goals per month
+
+home_team_goals_month <- soccer_month %>%
+  select(HomeTeam, FTHG, month) %>%
+  rename("Team" = "HomeTeam") %>%
+  rename("Score" = "FTHG")
+
+away_team_goals_month <- soccer_month %>%
+  select(AwayTeam, FTAG, month) %>%
+  rename("Team" = "AwayTeam") %>%
+  rename("Score" = "FTAG")
+
+team_goals_month <- rbind(home_team_goals_month, away_team_goals_month)
+
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+goals_per_month <- team_goals_month %>%
+  mutate(month = factor(month, levels = c("August", "September", "October", "November", "December", "January", "February", "March", "April", "May"))) %>%
+  group_by(month) %>%
+  summarise(goals = n(), mean_goals = mean(Score)) 
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# lollipop plot of total number of goals per month 
+
+ggplot(data = goals_per_month, aes(x = month, y = goals)) + geom_segment(aes(xend = month, y = 0, yend = goals), size = 1.0, color = "blue") + geom_point(size = 2.5, color = "black") + labs(y = "Total Goals Scored", x = "Month", title = "Goals Scored per Month in 2021-2022 Season") + theme_minimal() + coord_flip() + geom_text(data = goals_per_month, aes(label = goals), position = position_dodge(width = 1), vjust =  -1, size = 3.5) + theme(plot.title = element_text(face = "bold"))
+```
+
+
+This lollipop plot displays in chronological order the months in the season and the total goals scored in that month by all of the teams. The season starts in early August and ends in early May. It is clear from the plot that December was the month with the highest number of goals scored at 104. April was close behind in second place with 100 goals scored. I am not surprised that those two months had the highest number of goals scored. December has the highest number of games played in a month since it is the festive period with the holidays, so with more games there is the opportunity to score more goals. Additionally, I hypothesize that a lot of goals were scored in April because it is almost the end of the season and the regulation battle along with the final push for the championship kicks in and teams are extra motivated to score more goals. From the plot, we also see that five months of the season (August, September, November, January and March) had roughly the same number of goals scored around 60 goals. This is interesting and makes me wonder whether the high number of goals scored in December and April are unusual or typical in a given season. This would be interesting to further investigate with data from past seasons!
+
+
+##  Average Goals Scored per Game by Team
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+home_team_goals <- soccer_month %>%
+  select(HomeTeam, FTHG) %>%
+  rename("Team" = "HomeTeam") %>%
+  rename("Score" = "FTHG")
+
+away_team_goals <- soccer_month %>%
+  select(AwayTeam, FTAG) %>%
+  rename("Team" = "AwayTeam") %>%
+  rename("Score" = "FTAG")
+
+team_goals <- rbind(home_team_goals, away_team_goals)
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+mean_goals_scored <- team_goals %>%
+  group_by(Team) %>%
+  summarise(mean_gpg = mean(Score), sd_Goals = sd(Score), n_games = n()) %>%
+  mutate(se = sd_Goals/sqrt(n_games), lb_se = mean_gpg - se, ub_se = mean_gpg + se) %>%
+  mutate(Team = fct_reorder(Team, mean_gpg))
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# error bar plot for average goals scored per game
+ggplot(data = mean_goals_scored, aes(x = Team, y = mean_gpg)) + geom_errorbar(aes(ymin = lb_se, ymax = ub_se, color = Team), width = 0.2) + theme_minimal() + geom_point() + coord_flip() + labs(y = "Average Goals Scored per Game", title = "Average Goals Scored per Game by Team in 2021-2022", caption = "Bars represent standard error from the mean") + theme(legend.position = "none", plot.title = element_text(face = "bold")) 
+```
+
+This error bar plot shows the average goals scored per game by each team in the Premier League season in 2021-2022.  We see that Manchester City and Liverpool lead the league with approximately over 2.5 goals scored per game. This plot is reflective of the final results from the season because Manchester City came in first place and Liverpool came in second place. It seems like for the 2021-2022 season, teams needed to average scoring at least 1 goal per game to avoid regulation. The bottom three teams averaged scoring less than 1 goal per game and consequently they got relegated to the Championship League. 
+
+
+## Average Goals Conceded per Game by Team
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+home_team_goals_against <- soccer_month %>%
+  select(HomeTeam, FTAG) %>%
+  rename("Team" = "HomeTeam") %>%
+  rename("Goals_Against" = "FTAG")
+
+
+away_team_goals_against <- soccer_month %>%
+  select(AwayTeam, FTHG) %>%
+  rename("Team" = "AwayTeam") %>%
+  rename("Goals_Against" = "FTHG")
+
+team_goals_against <- rbind(home_team_goals_against, away_team_goals_against)
+
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = 'hide'}
+mean_goals_scored_against <- team_goals_against %>%
+  group_by(Team) %>%
+  summarise(mean_goal_conceded = mean(Goals_Against), sd_Goals_Conceded = sd(Goals_Against), n_games = n()) %>%
+  mutate(se = sd_Goals_Conceded/sqrt(n_games), lb_se = mean_goal_conceded - se, ub_se = mean_goal_conceded + se) %>%
+  mutate(Team = fct_reorder(Team, mean_goal_conceded))
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# error bar plot for average goals conceded per game
+ggplot(data = mean_goals_scored_against, aes(x = Team, y = mean_goal_conceded)) + geom_errorbar(aes(ymin = lb_se, ymax = ub_se, color = Team), width = 0.2) + theme_minimal() + geom_point() + coord_flip() + labs(y = "Average Goals Conceded per Game", title = "Average Goals Conceded per Game by Teams in 2021-2022", caption = "Bars represent standard error from the mean") + theme(legend.position = "none", plot.title = element_text(face = "bold"))
+```
+
+This error bar plot depicts the average number of goals that a team concedes per game in the 2021-2022 season. From the plot, we see that Norwich gave up the most goals per game with approximately 2.25 goals. It is not surprising that this plot is opposite to the plot above that shows the average number of goals that a team scores in a game. We see that the teams that got relegated had higher average number of goals conceded per game, while Manchester City who won the league conceded on average the fewest amount of goals in the league. 
+
+
+## Shot Conversion Rate
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(knitr)
+# conversion rate of goals to total shots
+conversion_rate_df <- prem_stats %>%
+  mutate(conversion_rate = (total_goals/total_shots_target)*100) %>%
+  select(Team, total_goals, total_shots_target, conversion_rate) %>%
+  rename("total_shots_on_target" = total_shots_target) %>%
+  mutate(conversion_rate = round(conversion_rate, 2)) %>%
+  mutate(Team = fct_reorder(Team, conversion_rate)) %>%
+  arrange(desc(conversion_rate)) %>%
+  rename("Total Goals" = total_goals) %>%
+  rename("Total Shots on Target" = total_shots_on_target) %>%
+  rename('ConversionRate' = conversion_rate)
+
+kable(conversion_rate_df)
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(RColorBrewer)
+nb.cols <- 20
+mycolors <- colorRampPalette(brewer.pal(20, "Set1"))(nb.cols)
+
+# conversion rate plot
+ggplot(data = conversion_rate_df, aes(x = Team, y = ConversionRate)) + geom_col(aes(fill = Team, y = ConversionRate)) + coord_flip() + labs(y = "Shot Conversion Rate") + theme_minimal() + theme(legend.position = "none", plot.title = element_text(face = "bold")) + labs(title = "Shot Conversion Rate by Teams in 2021-2022", caption = "Shot conversion rate = (total goals/total shots on target)") + scale_fill_manual(values = mycolors)
+```
+
+This bar plot shows the shot conversion rate by each team in the 2021-2022 season. Shot conversion rate is defined as the percentage of total goals a team scores divided by the total number of shots on target that a team has. This metric shows how effective a team is at scoring, with higher percentages meaning that when a team shoots, they will most likely score. From the plot, we see that Manchester City has the highest shot conversion rate of close to 40%. On the other hand, we see that Norwich has the lowest shot conversion rate of just over 20%.  
+
+## Wrap-Up
+
+In this blog post, many statistics surrounding goals were revealed in various visualizations. My personal favorite was the bar plot showing the shot conversion rate by each team because I found it fascinating how the top teams in the league had close to a 40% conversion rate. That number is pretty high and shows how the top teams that win the league score goals when given the chance to! If I had more time and more data, I would love to add the names of players who scored each of the goals in the season. I would love to see which players scored the most goals and to also see which months they tended to score more goals in and whether a pattern existed. 
+
+Overall, I really enjoyed data wrangling and creating visualizations with this data set. I liked how I had data from each match, so I could add the variability of the data to the error bar plots examining average goals scored and average goals conceded. I wasn't able to do this with the previous holiday rating data set and I am glad that I was able to do this here. We learned in class that adding variability to a bar plot or to a lollipop plot allows the reader to see the distribution shape, sample size and any outliers that may be obscuring the data. With the error bars for example, you can see that Manchester City's upper bound for goals scored and lower bound for goal scored is much larger than the other teams. You would not be able to tell this fact without the error bars added to the plot. In general, I believe that all of my visualizations effectively communicate the information because they are free of clutter, readable and informative. For example, I included text that displays the actual number of goals scored per month in addition to the scale on the x-axis because I think it helps with readability. I also added a table to display the total number of shots on target and the total number of goals scored by each team because it helps show the sample size for the shot conversion rate plot.
+
+Thanks for reading!
+
