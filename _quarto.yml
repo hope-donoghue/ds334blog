@@ -8,9 +8,9 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/hope-donoghue/ds334blog
+      - icon: linkedin
+        href: https://www.linkedin.com/in/hope-donoghue-2ba54b238/
 format:
   html:
     theme: cerulean

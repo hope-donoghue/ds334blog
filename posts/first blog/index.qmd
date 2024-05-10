@@ -71,9 +71,12 @@ holiday_movies_best <- holiday_movies_ %>%
 ```
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(plotly)
 # top 10 best rated holiday movies
-ggplot(data = holiday_movies_best, aes(y = average_rating, x= primary_title_year)) + 
-geom_segment(aes(xend = primary_title_year, y = 0, yend = average_rating), color = "red", size = 1.5) + coord_flip() + geom_point(color = "#249932", size = 3.5) + geom_text(data = holiday_movies_best, aes(label = average_rating), position = position_dodge(width = 1), vjust =  -1, size = 3.5) + theme_minimal() + labs(y = "Average Rating", x= "Movie", title = "Top 10 Highest Rated Holiday Movies") + theme(plot.title = element_text(face = "bold"))
+highest_rated_movies <- ggplot(data = holiday_movies_best, aes(y = average_rating, x= primary_title_year, label = num_votes, label_2 = average_rating)) + 
+geom_segment(aes(xend = primary_title_year, y = 0, yend = average_rating), color = "red", size = 1.5) + coord_flip() + geom_point(color = "#249932", size = 3.5) + theme_minimal() + labs(y = "Average Rating", x= "Movie", title = "Top 10 Highest Rated Holiday Movies") + theme(plot.title = element_text(face = "bold"))
+
+ggplotly(highest_rated_movies, tooltip = c("label_2", "label"))
 ```
 
 Which movies should you definitely add to your list to watch? Look no further! This lollipop plot displays the top ten highest rated holiday movies that received more than 1000 votes by users. With an average rating of 8.1, "A Christmas Carol" also known as "Scrooge" from 1951 is the top rated holiday movie. A close second with a rating of 8.0, is "Roman Holiday" from 1953. Interestingly enough, all of the movies that made the top ten are from the 20th century. My personal favorite is "White Christmas," so I was happy to see that movie made the top ten. 
