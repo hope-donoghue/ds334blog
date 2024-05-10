@@ -9,7 +9,7 @@
 <meta name="author" content="Hope Donoghue">
 <meta name="dcterms.date" content="2024-02-06">
 
-<title>ds334blog - Holiday Movie Ratings</title>
+<title>Data Visualization Blog - Holiday Movie Ratings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -74,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">ds334blog</span>
+    <span class="navbar-title">Data Visualization Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -88,12 +96,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/hope-donoghue/ds334blog" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/hope-donoghue-2ba54b238/" rel="" target=""><i class="bi bi-linkedin" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -198,7 +206,8 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="top-10-highest-rated-holiday-movies">Top 10 Highest Rated Holiday Movies</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-63437f13818dbbc30d4d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-63437f13818dbbc30d4d">{"x":{"data":[{"x":[0,8.0999999999999996,null,0,8,null,0,7.9000000000000004,null,0,7.9000000000000004,null,0,7.7000000000000002,null,0,7.7000000000000002,null,0,7.5999999999999996,null,0,7.5999999999999996,null,0,7.5,null,0,7.5],"y":[10,10,null,9,9,null,7,7,null,8,8,null,5,5,null,6,6,null,4,4,null,3,3,null,1,1,null,2,2],"text":["num_votes:  24671<br />average_rating: 8.1","num_votes:  24671<br />average_rating: 8.1",null,"num_votes: 145289<br />average_rating: 8.0","num_votes: 145289<br />average_rating: 8.0",null,"num_votes: 163273<br />average_rating: 7.9","num_votes: 163273<br />average_rating: 7.9",null,"num_votes: 367288<br />average_rating: 7.9","num_votes: 367288<br />average_rating: 7.9",null,"num_votes:  17619<br />average_rating: 7.7","num_votes:  17619<br />average_rating: 7.7",null,"num_votes:  66015<br />average_rating: 7.7","num_votes:  66015<br />average_rating: 7.7",null,"num_votes:  47688<br />average_rating: 7.6","num_votes:  47688<br />average_rating: 7.6",null,"num_votes:   3855<br />average_rating: 7.6","num_votes:   3855<br />average_rating: 7.6",null,"num_votes:   8312<br />average_rating: 7.5","num_votes:   8312<br />average_rating: 7.5",null,"num_votes:   1934<br />average_rating: 7.5","num_votes:   1934<br />average_rating: 7.5"],"type":"scatter","mode":"lines","line":{"width":5.6692913385826778,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[8.0999999999999996,8,7.9000000000000004,7.9000000000000004,7.7000000000000002,7.7000000000000002,7.5999999999999996,7.5999999999999996,7.5,7.5],"y":[10,9,7,8,5,6,4,3,1,2],"text":["num_votes:  24671<br />average_rating: 8.1","num_votes: 145289<br />average_rating: 8.0","num_votes: 163273<br />average_rating: 7.9","num_votes: 367288<br />average_rating: 7.9","num_votes:  17619<br />average_rating: 7.7","num_votes:  66015<br />average_rating: 7.7","num_votes:  47688<br />average_rating: 7.6","num_votes:   3855<br />average_rating: 7.6","num_votes:   8312<br />average_rating: 7.5","num_votes:   1934<br />average_rating: 7.5"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(36,153,50,1)","opacity":1,"size":13.228346456692915,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(36,153,50,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":241.82648401826489},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"<b> Top 10 Highest Rated Holiday Movies <\/b>","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.40500000000000003,8.504999999999999],"tickmode":"array","ticktext":["0","2","4","6","8"],"tickvals":[-5.5511151231257827e-17,2.0000000000000009,4,6,7.9999999999999991],"categoryorder":"array","categoryarray":["0","2","4","6","8"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Average Rating","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,10.6],"tickmode":"array","ticktext":["A Christmas Carol - 1938","The Night Before Christmas - 1961","Christmas in August - 1998","White Christmas - 1954","Holiday - 1938","The Muppet Christmas Carol - 1992","A Christmas Story - 1983","The Nightmare Before Christmas - 1993","Roman Holiday - 1953","A Christmas Carol - 1951"],"tickvals":[1,2,3,4,5,6.0000000000000009,7,8,9,10],"categoryorder":"array","categoryarray":["A Christmas Carol - 1938","The Night Before Christmas - 1961","Christmas in August - 1998","White Christmas - 1954","Holiday - 1938","The Muppet Christmas Carol - 1992","A Christmas Story - 1983","The Nightmare Before Christmas - 1993","Roman Holiday - 1953","A Christmas Carol - 1951"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Movie","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1810547a006b0":{"x":{},"y":{},"label":{},"label_2":{},"xend":{},"yend":{},"type":"scatter"},"181055b17318c":{"x":{},"y":{},"label":{},"label_2":{}}},"cur_data":"1810547a006b0","visdat":{"1810547a006b0":["function (y) ","x"],"181055b17318c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Which movies should you definitely add to your list to watch? Look no further! This lollipop plot displays the top ten highest rated holiday movies that received more than 1000 votes by users. With an average rating of 8.1, “A Christmas Carol” also known as “Scrooge” from 1951 is the top rated holiday movie. A close second with a rating of 8.0, is “Roman Holiday” from 1953. Interestingly enough, all of the movies that made the top ten are from the 20th century. My personal favorite is “White Christmas,” so I was happy to see that movie made the top ten.</p>
